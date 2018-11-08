@@ -33,7 +33,7 @@ gem 'font-awesome-rails'
 gem 'money-rails'
 gem 'carrierwave'
 gem 'rmagick'
-gem 'stripe'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'faker'
 
 # Use Capistrano for deployment
