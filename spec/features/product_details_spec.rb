@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ProductDetails", type: :feature do
+RSpec.feature "ProductDetails", type: :feature, js: true do
 
   # SETUP
   before :each do
@@ -28,6 +28,7 @@ RSpec.feature "ProductDetails", type: :feature do
 
     # VERIFY
     expect(page).to have_css 'section.products-show'
+    save_screenshot
   end
 
 end
