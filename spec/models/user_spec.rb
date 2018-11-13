@@ -77,12 +77,19 @@ RSpec.describe User, type: :model do
   describe '.authenticate_with_credentials' do
     # examples for this class method here
     before :all do
-      @user = User.new(first_name: 'test', last_name: 'name', email: 'some@example.com', password: 'testpass', password_confirmation: 'testpass')
-      @user.save
+      @user = User.create(first_name: 'test', last_name: 'name', email: 'some@example.com', password: 'testpass', password_confirmation: 'testpass')
     end
 
     it 'should successfully login' do
-      expect(@user.authenticate_with_credentials('some@example.com', 'testpass')).to be true
+      expect(User.authenticate_with_credentials('some@example.com', 'testpass')).to eq User.find_by_email('some@example.com')
+    end
+
+    it 'should strip whitespace from login email' do
+      expect(User.authenticate_with_credentials('    some@example.com    ', 'testpass')).to eq User.find_by_email('some@example.com')
+    end
+
+    it 'should strip downcase login email' do
+      expect(User.authenticate_with_credentials('sOMe@example.COM', 'testpass')).to eq User.find_by_email('some@example.com')
     end
 
 
