@@ -60,13 +60,25 @@ RSpec.describe User, type: :model do
       expect(@user.save).to be false
     end
 
+    it 'password confirmation should match password' do
+      @user = User.new
+      @user.first_name = 'test'
+      @user.last_name = 'name'
+      @user.email = 'some@email.com'
+      @user.password = 'testpass'
+      @user.password_confirmation = 'nottestpass'
+      expect(@user.save).to be false
+    end
+
 
 
   end
 
   describe '.authenticate_with_credentials' do
     # examples for this class method here
-
+    before :all do
+      @user = Category.new(name: 'testing-category')
+    end
 
   end
 
