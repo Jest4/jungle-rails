@@ -77,8 +77,14 @@ RSpec.describe User, type: :model do
   describe '.authenticate_with_credentials' do
     # examples for this class method here
     before :all do
-      @user = Category.new(name: 'testing-category')
+      @user = User.new(first_name: 'test', last_name: 'name', email: 'some@example.com', password: 'testpass', password_confirmation: 'testpass')
+      @user.save
     end
+
+    it 'should successfully login' do
+      expect(@user.authenticate_with_credentials('some@example.com', 'testpass')).to be true
+    end
+
 
   end
 
